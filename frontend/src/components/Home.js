@@ -22,11 +22,20 @@ export default function Home() {
       <Button variant="contained" color="secondary">
         Secondary
       </Button>
+      <Button variant="contained" info='true'>
+        Info
+      </Button>
+      <Button variant="contained" error='false'>
+        Error
+      </Button>
+      <Button variant="contained" warning='true'>
+        Warning
+      </Button>
+      <Button variant="contained" success='true' color='primary'>
+        Success
+      </Button>
       <Button variant="contained" disabled>
         Disabled
-      </Button>
-      <Button variant="contained" color="primary" href="#contained-buttons">
-        Link
       </Button>
     </div>
   );
