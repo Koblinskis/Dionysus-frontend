@@ -4,21 +4,24 @@ import AppRouter from './router/AppRouter'
 import "./App.css";
 import { createMuiTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { ThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
+import { Box } from '@material-ui/core'
+import 'normalize.css'
+
 const darkTheme = createMuiTheme({
   palette: {
     primary: {
-      light: '#000000',
+      light: '#404040',
       main: '#000000',
-      dark: '#000000'
+      dark: '#333333'
     },
     secondary: {
-      light: '#ffffff',
+      light: '#404040',
       main: '#000000',
-      dark: '#f2f2f2'
+      dark: '#333333'
     },
     info: {
-      main: '#002233',
+      main: '#4d4d4d',
       light: '#002233',
       dark: '#002233'
     },
@@ -41,7 +44,7 @@ const darkTheme = createMuiTheme({
       main: '#ffffff'
     },
     background: {
-      default: '#00cccc'
+      default: '#000000'
     }
   },
   typography: {
@@ -49,6 +52,7 @@ const darkTheme = createMuiTheme({
     color: '#ffffff'
   },
 });
+
 const defTheme = createMuiTheme({
   palette: {
     primary: {
@@ -62,7 +66,7 @@ const defTheme = createMuiTheme({
       dark: '#f2f2f2'
     },
     info: {
-      main: '#002233',
+      main: '#e6ffe6',
       light: '#002233',
       dark: '#002233'
     },
@@ -82,10 +86,10 @@ const defTheme = createMuiTheme({
       dark: '#388e3c'
     },
     default: {
-      main: '#ffffff'
+      main: '#000000'
     },
     background: {
-      default: '#00cccc'
+      default: '#003399'
     }
   },
   typography: {
@@ -110,13 +114,13 @@ function App() {
   }
 
   return(
-    <div className="App">
-    <ThemeProvider theme={themeType}>
-      <button onClick={chooseTheme}>dark</button>
-      <button onClick={chooseTheme}>default</button>
-      <AppRouter/>
+    <ThemeProvider theme={themeType} >
+      <Box bgcolor='info.main'> 
+        <button onClick={chooseTheme}>dark</button>
+        <button onClick={chooseTheme}>default</button>
+        <AppRouter/>
+      </Box>
     </ThemeProvider>
-    </div>
   );
 }
 
