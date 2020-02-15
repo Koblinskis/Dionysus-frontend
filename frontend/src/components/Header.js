@@ -1,7 +1,7 @@
 import React from 'react';
 import { fade, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import { AppBar, Toolbar } from '@material-ui/core';
-import { IconButton, MenuItem } from '@material-ui/core';
+import { IconButton, MenuItem, Button } from '@material-ui/core';
 import { Typography, InputBase } from '@material-ui/core';
 import { Badge, Menu } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -10,6 +10,8 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import Link from '@material-ui/core/Link';
+import { NavLink } from 'react-router-dom'
 
 
 
@@ -74,12 +76,17 @@ const useStyles = makeStyles(theme => ({
       display: 'none',
     },
   },
+  whiteColor: {
+    color: 'white',
+    textDecoration: 'none'
+  }
 }));
 
 export default function Header() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [login, setLogin] = React.useState(true)
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -129,16 +136,16 @@ export default function Header() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
+        <IconButton aria-label="show 4 new mails">
+          <Badge badgeContent={4} color="error">
             <MailIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
       </MenuItem>
       <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
+        <IconButton aria-label="show 11 new notifications">
+          <Badge badgeContent={1} color="error">
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -149,7 +156,6 @@ export default function Header() {
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
-          color="inherit"
         >
           <AccountCircle />
         </IconButton>
@@ -165,17 +171,17 @@ export default function Header() {
           <IconButton
             edge="start"
             className={classes.menuButton}
-            color='secondary'
             aria-label="open drawer"
+            className={classes.whiteColor}
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap color='secondary'>
+          <Typography className={classes.title} variant="h6" noWrap>
             Home Page
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
-              <SearchIcon color='secondary' />
+              <SearchIcon />
             </div>
             <InputBase
               placeholder="Search…"
@@ -189,26 +195,34 @@ export default function Header() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color='secondary'>
-              <Badge badgeContent={2} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color='secondary'>
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color='secondary'
-            >
-              <AccountCircle />
-            </IconButton>
+            { login 
+              ? 
+              <Button><NavLink to="/registration" className={classes.whiteColor}>Login</NavLink> </Button>
+              :
+              <div>
+                <IconButton aria-label="show 4 new mails" className={classes.whiteColor}>
+                <Badge badgeContent={0} color="error">
+                  <MailIcon />
+                </Badge>
+              </IconButton>
+              <IconButton aria-label="show 17 new notifications" className={classes.whiteColor}>
+                <Badge badgeContent={0} color="error">
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+              <IconButton
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                className={classes.whiteColor}
+              >
+                <AccountCircle />
+              </IconButton>
+              </div>
+              
+            }
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
@@ -216,7 +230,7 @@ export default function Header() {
               aria-controls={mobileMenuId}
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
-              color="inherit"
+              className={classes.whiteColor}
             >
               <MoreIcon />
             </IconButton>
