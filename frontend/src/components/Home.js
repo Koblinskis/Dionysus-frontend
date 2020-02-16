@@ -20,8 +20,8 @@ export default function Home(props) {
       <Button variant="contained" color="primary" onClick={props.changeTheme}>
         dark
       </Button>
-      <Button variant="contained" color="secondary">
-        Secondary
+      <Button variant="contained" color="secondary" onClick={props.changeTheme}>
+        default
       </Button>
       <Button variant="contained" info='true'>
         Info

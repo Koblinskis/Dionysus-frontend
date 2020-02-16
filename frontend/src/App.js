@@ -17,7 +17,7 @@ const darkTheme = createMuiTheme({
     },
     secondary: {
       light: '#404040',
-      main: '#000000',
+      main: '#ffffff',
       dark: '#333333'
     },
     info: {
@@ -36,7 +36,7 @@ const darkTheme = createMuiTheme({
       dark: '#f57c00'
     },
     success: {
-      main: '#388e3c',
+      main: '#56595e',
       light: '#388e3c',
       dark: '#388e3c'
     },
@@ -62,7 +62,7 @@ const defTheme = createMuiTheme({
     },
     secondary: {
       light: '#ffffff',
-      main: '#00cccc',
+      main: '#000000',
       dark: '#f2f2f2'
     },
     info: {
@@ -81,7 +81,7 @@ const defTheme = createMuiTheme({
       dark: '#f57c00'
     },
     success: {
-      main: '#388e3c',
+      main: '#ffffff',
       light: '#388e3c',
       dark: '#388e3c'
     },

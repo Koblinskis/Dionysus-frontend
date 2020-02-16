@@ -14,7 +14,7 @@ export default function AppRouter(props) {
         <Header />
         <Switch>
           {console.log(props)}
-          <Route path="/" component={() => <Home changeTheme={props.changeTheme} />}/>
+          <Route path="/" exact render={() => <Home changeTheme={props.changeTheme} />}/>
           <Route path="/registration" component={Registration} />
           <Route path="/login" component={Login} />
           <Route path="/about" component={About} />
