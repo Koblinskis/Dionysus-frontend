@@ -101,9 +101,9 @@ const defTheme = createMuiTheme({
 function App() {
   const [themeType, setThemeType] = React.useState(defTheme)
 
-  const chooseTheme = (e) => {
+  function chooseTheme(e) {
     console.log(e.target.innerText)
-    switch(e.target.innerText) {
+    switch(e.target.innerText.toLowerCase()) {
       case 'dark':
         setThemeType(darkTheme);
         break;
@@ -118,7 +118,7 @@ function App() {
       <Box bgcolor='info.main'> 
         <button onClick={chooseTheme}>dark</button>
         <button onClick={chooseTheme}>default</button>
-        <AppRouter/>
+        <AppRouter changeTheme={chooseTheme}/>
       </Box>
     </ThemeProvider>
   );

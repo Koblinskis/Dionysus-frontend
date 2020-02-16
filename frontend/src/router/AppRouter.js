@@ -7,13 +7,14 @@ import Registration from '../components/Registration'
 import Login from '../components/Login'
 import About from '../components/About'
 
-export default function AppRouter() {
+export default function AppRouter(props) {
   return (
     <BrowserRouter>
       <div>
         <Header />
         <Switch>
-          <Route path="/" component={Home} exact={true}/>
+          {console.log(props)}
+          <Route path="/" component={() => <Home changeTheme={props.changeTheme} />}/>
           <Route path="/registration" component={Registration} />
           <Route path="/login" component={Login} />
           <Route path="/about" component={About} />

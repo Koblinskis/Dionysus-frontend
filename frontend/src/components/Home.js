@@ -10,14 +10,15 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Home() {
+export default function Home(props) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
+      {console.log(props)}
       <Button variant="contained">Default</Button>
-      <Button variant="contained" color="primary">
-        Primary
+      <Button variant="contained" color="primary" onClick={props.changeTheme}>
+        dark
       </Button>
       <Button variant="contained" color="secondary">
         Secondary
