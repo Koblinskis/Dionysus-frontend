@@ -1,0 +1,1 @@
+const uData = require('../model/UData')
