@@ -44,6 +44,7 @@ export default function Registration() {
   const classes = useStyles()
   return (
     <Box className={classes.center}>
+      {console.log(TextField)}
       <Box bgcolor='success.main' border={1} className={classes.signUp}>
         <Typography variant="h4" component="h2" color='secondary' className={classes.signUpTitle}>
           Registration

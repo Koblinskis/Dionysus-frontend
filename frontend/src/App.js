@@ -51,7 +51,12 @@ const darkTheme = createMuiTheme({
     },
     background: {
       default: '#000000'
-    }
+    },
+    text: {
+      primary: '#ffffff',
+      secondary: '#ffffff'
+    },
+    divider: '#ffffff'
   },
   typography: {
     fontFamily: 'Raleway, Arial',
@@ -96,7 +101,12 @@ const defTheme = createMuiTheme({
     },
     background: {
       default: '#003399'
-    }
+    },
+    text: {
+      primary: '#000000',
+      secondary: '#000000'
+    },
+    divider: '#ffffff'
   },
   typography: {
     fontFamily: 'Raleway, Arial',
@@ -122,6 +132,7 @@ function App() {
   return(
     <ThemeProvider theme={themeType} >
       <Box bgcolor='info.main'> 
+      {console.log(themeType)}
         <button onClick={chooseTheme}>dark</button>
         <button onClick={chooseTheme}>default</button>
         <AppRouter changeTheme={chooseTheme}/>
