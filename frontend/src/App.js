@@ -133,8 +133,6 @@ function App() {
     <ThemeProvider theme={themeType} >
       <Box bgcolor='info.main'> 
       {console.log(themeType)}
-        <button onClick={chooseTheme}>dark</button>
-        <button onClick={chooseTheme}>default</button>
         <AppRouter changeTheme={chooseTheme}/>
       </Box>
     </ThemeProvider>

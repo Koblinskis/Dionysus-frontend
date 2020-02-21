@@ -11,7 +11,7 @@ export default function AppRouter(props) {
   return (
     <BrowserRouter>
       <div>
-        <Header />
+        <Header changeTheme={props.changeTheme} />
         <Switch>
           {console.log(props)}
           <Route path="/" exact render={() => <Home changeTheme={props.changeTheme} />}/>

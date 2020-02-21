@@ -1,6 +1,6 @@
 import React from 'react';
 import { fade, makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import { AppBar, Toolbar } from '@material-ui/core';
+import { AppBar, Toolbar, Box } from '@material-ui/core';
 import { IconButton, MenuItem, Button } from '@material-ui/core';
 import { Typography, InputBase } from '@material-ui/core';
 import { Badge, Menu } from '@material-ui/core';
@@ -10,10 +10,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import Link from '@material-ui/core/Link';
 import { NavLink } from 'react-router-dom'
-
-
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -82,14 +79,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Header() {
+export default function Header(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [login, setLogin] = React.useState(true)
-
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const menuId = 'primary-search-account-menu';
+  const mobileMenuId = 'primary-search-account-menu-mobile';
 
   const handleProfileMenuOpen = event => {
     setAnchorEl(event.currentTarget);
@@ -108,7 +106,6 @@ export default function Header() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -124,7 +121,6 @@ export default function Header() {
     </Menu>
   );
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
@@ -165,7 +161,7 @@ export default function Header() {
   );
 
   return (
-    <div className={classes.grow}>
+    <Box className={classes.grow}>
       <AppBar position="static" color='primary'>
         <Toolbar>
           <IconButton
@@ -179,10 +175,10 @@ export default function Header() {
           <Typography className={classes.title} variant="h6" noWrap>
             Home Page
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
+          <Box className={classes.search}>
+            <Box className={classes.searchIcon}>
               <SearchIcon />
-            </div>
+            </Box>
             <InputBase
               placeholder="Search…"
               classes={{
@@ -192,39 +188,53 @@ export default function Header() {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-          </div>
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
-            { login 
+          </Box>
+          <Box>
+            <Button variant="contained" onClick={props.changeTheme}>
+              dark
+            </Button>
+            <Button variant="contained" onClick={props.changeTheme}>
+              default
+            </Button>
+          </Box>
+          <Box className={classes.grow} />
+          <Box className={classes.sectionDesktop}>
+            { login
               ? 
-              <Button><NavLink to="/registration" className={classes.whiteColor}>Login</NavLink> </Button>
+              <Box>
+                <Button>
+                  <NavLink to="/login" className={classes.whiteColor}>Login</NavLink>
+                </Button>/
+                <Button>
+                  <NavLink to="/registration" className={classes.whiteColor}>Signup</NavLink>
+                </Button>
+              </Box>
               :
-              <div>
+              <Box>
                 <IconButton aria-label="show 4 new mails" className={classes.whiteColor}>
-                <Badge badgeContent={0} color="error">
-                  <MailIcon />
-                </Badge>
-              </IconButton>
-              <IconButton aria-label="show 17 new notifications" className={classes.whiteColor}>
-                <Badge badgeContent={0} color="error">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
-              <IconButton
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                className={classes.whiteColor}
-              >
-                <AccountCircle />
-              </IconButton>
-              </div>
-              
+                  <Badge badgeContent={0} color="error">
+                    <MailIcon />
+                  </Badge>
+                </IconButton>
+                <IconButton aria-label="show 17 new notifications" className={classes.whiteColor}>
+                  <Badge badgeContent={0} color="error">
+                    <NotificationsIcon />
+                  </Badge>
+                </IconButton>
+                <IconButton
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  className={classes.whiteColor}
+                >
+                  <AccountCircle />
+                </IconButton>
+              </Box>
             }
-          </div>
-          <div className={classes.sectionMobile}>
+          </Box>
+          <Box className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"
               aria-controls={mobileMenuId}
@@ -234,11 +244,11 @@ export default function Header() {
             >
               <MoreIcon />
             </IconButton>
-          </div>
+          </Box>
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-    </div>
+    </Box>
   );
 }

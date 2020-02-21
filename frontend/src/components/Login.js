@@ -2,6 +2,7 @@ import React from 'react'
 import { Typography, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   signUp: {
@@ -14,7 +15,8 @@ const useStyles = makeStyles(theme => ({
       padding: '20px',
       maxWidth: 200,
     },
-    alignContent: 'center'
+    alignContent: 'center',
+    textAlign: 'center',
   },
   center: {
     display: 'flex',
@@ -27,16 +29,14 @@ const useStyles = makeStyles(theme => ({
       marginTop: '10px',
     },
   },
-  input: {
-    fontWeight: 500,
-    color: theme.palette.secondary
-  },
   signUpTitle: {
-    textAlign: 'center',
     fontSize: '34px',
     [theme.breakpoints.down('xs')]: {
       fontSize: '20px',
     },
+  },
+  bottomText: {
+    marginTop: '30px'
   }
 }))
 
@@ -44,59 +44,33 @@ export default function Login() {
   const classes = useStyles();
   return (
     <Box className={classes.center}>
-      {console.log(TextField)}
       <Box bgcolor='success.main' border={1} className={classes.signUp}>
         <Typography variant="h4" component="h2" color='secondary' className={classes.signUpTitle}>
-          Registration
+          Login
         </Typography>
-        <div>
-        <TextField
-          required
-          id="standard-basic"
-          label="Username"
-          autoFocus
-          color='secondary'
-          className={classes.inputFields}
-          inputProps={{
-            color: 'white'
-          }}
-        />
-        <TextField
-          required
-          id="standard-basic"
-          label="Email"
-          color='secondary'
-          className={classes.inputFields}
-          InputProps={{
-            className: classes.input
-          }}
-        />
-        <TextField
-          required
-          id="standard-password-input"
-          label="Password"
-          type="password"
-          autoComplete="current-password"
-          color='secondary'
-          className={classes.inputFields}
-          InputProps={{
-            className: classes.input
-          }}
-        />
-        <TextField
-          required
-          id="standard-password-input"
-          label="Comfirm Password"
-          type="password"
-          autoComplete="current-password"
-          color='secondary'
-          className={classes.inputFields}
-          InputProps={{
-            className: classes.input
-          }}
-        />
-      </div>
+        <Box>
+          <TextField
+            required
+            id="standard-basic"
+            label="Username"
+            autoFocus
+            color='secondary'
+            className={classes.inputFields}
+          />
+          <TextField
+            required
+            id="standard-password-input"
+            label="Password"
+            type="password"
+            autoComplete="current-password"
+            color='secondary'
+            className={classes.inputFields}
+          />
+      </Box>
+      <Box className={classes.bottomText}>
+        <Typography variant="caption" color='secondary'>Don't have an account <NavLink to="/registration" color='secondary'>Signup</NavLink></Typography>
       </Box>
     </Box>
+  </Box>
   )
 }
