@@ -1,11 +1,9 @@
 import React from "react";
-import {hot} from "react-hot-loader";
+import { hot } from "react-hot-loader";
+import { ThemeProvider, makeStyles, createMuiTheme } from '@material-ui/core/styles';
+import { Box } from '@material-ui/core'
 import AppRouter from './router/AppRouter'
 import "./App.css";
-import { createMuiTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
-import { Box } from '@material-ui/core'
 import 'normalize.css'
 
 const useStyles = makeStyles(theme => ({

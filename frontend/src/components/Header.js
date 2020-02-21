@@ -1,16 +1,13 @@
 import React from 'react';
-import { fade, makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Box } from '@material-ui/core';
-import { IconButton, MenuItem, Button } from '@material-ui/core';
-import { Typography, InputBase } from '@material-ui/core';
-import { Badge, Menu } from '@material-ui/core';
+import { NavLink } from 'react-router-dom'
+import { fade, makeStyles } from '@material-ui/core/styles';
+import { AppBar, Toolbar, Box, IconButton, MenuItem, Button, Typography, InputBase, Badge, Menu } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import { NavLink } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   grow: {

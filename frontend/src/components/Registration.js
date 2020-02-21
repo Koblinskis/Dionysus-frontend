@@ -1,8 +1,7 @@
 import React from 'react'
-import { Typography, Box } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import { NavLink } from 'react-router-dom';
+import { Typography, Box, TextField } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   signUp: {
