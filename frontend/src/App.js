@@ -1,16 +1,10 @@
 import React from "react";
 import { hot } from "react-hot-loader";
-import { ThemeProvider, makeStyles, createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core'
 import AppRouter from './router/AppRouter'
 import "./App.css";
 import 'normalize.css'
-
-const useStyles = makeStyles(theme => ({
-  'global': {
-    
-  },
-}));
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -48,7 +42,7 @@ const darkTheme = createMuiTheme({
       main: '#ffffff'
     },
     background: {
-      default: '#000000'
+      default: '#4d4d4d'
     },
     text: {
       primary: '#ffffff',
@@ -98,13 +92,13 @@ const defTheme = createMuiTheme({
       main: '#000000'
     },
     background: {
-      default: '#003399'
+      default: '#e6ffe6'
     },
     text: {
       primary: '#000000',
       secondary: '#000000'
     },
-    divider: '#ffffff'
+    divider: '#000000'
   },
   typography: {
     fontFamily: 'Raleway, Arial',

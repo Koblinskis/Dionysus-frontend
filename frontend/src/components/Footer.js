@@ -1,14 +1,51 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { Box } from '@material-ui/core';
+import { Box, BottomNavigationAction, BottomNavigation } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import RestoreIcon from '@material-ui/icons/Restore';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+
+const useStyles = makeStyles(theme => ({
+  center: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  root: {
+    maxWidth: 900,
+    minWidth: 500,
+    backgroundColor: theme.palette.background.default,
+  },
+}));
 
 export default function Footer() {
+  const classes = useStyles();
+  const [value, setValue] = React.useState(0);
+
   return (
-    <Box>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/registration">Registration</NavLink>
-      <NavLink to="/login">Login</NavLink>
-      <NavLink to="/about">About</NavLink>
-    </Box>
-  )
+    <Box className={classes.center}>
+      
+    <BottomNavigation
+      value={value}
+      onChange={(event, newValue) => {
+        setValue(newValue);
+      }}
+      showLabels
+      className={classes.root}
+      color='secondary'
+    >
+      <BottomNavigationAction label="Sign-Up" icon={<FavoriteIcon />} />
+      <BottomNavigationAction label="Login" icon={<LocationOnIcon />} />
+      <BottomNavigationAction label="Login" icon={<LocationOnIcon />} />
+      <BottomNavigationAction label="Login" icon={<LocationOnIcon />} />
+      <BottomNavigationAction label="Login" icon={<LocationOnIcon />} />
+      <BottomNavigationAction label="Login" icon={<LocationOnIcon />} />
+      <BottomNavigationAction label="Login" icon={<LocationOnIcon />} />
+      <BottomNavigationAction label="Login" icon={<LocationOnIcon />} />
+      <BottomNavigationAction label="Login" icon={<LocationOnIcon />} />
+      <BottomNavigationAction label="Login" icon={<LocationOnIcon />} />
+      <BottomNavigationAction label="Login" icon={<LocationOnIcon />} />
+    </BottomNavigation>
+  </Box>
+  );
 }

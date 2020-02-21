@@ -1,13 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom'
 import { fade, makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Box, IconButton, MenuItem, Button, Typography, InputBase, Badge, Menu } from '@material-ui/core';
+import { AppBar, Toolbar, Box, IconButton, MenuItem, Button, Typography, InputBase, Badge, Menu, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -73,6 +74,17 @@ const useStyles = makeStyles(theme => ({
   whiteColor: {
     color: 'white',
     textDecoration: 'none'
+  },
+  list: {
+    width: 250,
+    height: '100%'
+  },
+  fullList: {
+    width: 'auto',
+  },
+  menuTitle: {
+    fontWeight: '600',
+    padding: '20px'
   }
 }));
 
@@ -102,6 +114,38 @@ export default function Header(props) {
   const handleMobileMenuOpen = event => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+  const [state, setState] = React.useState({
+    left: false,
+  });
+
+  const toggleDrawer = (side, open) => event => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setState({ ...state, [side]: open });
+  };
+
+  const sideList = side => (
+    <Box
+      className={classes.list}
+      role="presentation"
+      onClick={toggleDrawer(side, false)}
+      onKeyDown={toggleDrawer(side, false)}
+      bgcolor='success.main'
+    >
+      <Typography variant='h4' className={classes.menuTitle}>Menu</Typography>
+            <Divider color='primary' />
+      <List>
+        {['Home', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemText primary={text} />
+            <Divider />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
 
   const renderMenu = (
     <Menu
@@ -160,14 +204,18 @@ export default function Header(props) {
   return (
     <Box className={classes.grow}>
       <AppBar position="static" color='primary'>
+        <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
+          {sideList('left')}
+        </Drawer>
         <Toolbar>
           <IconButton
             edge="start"
             className={classes.menuButton}
             aria-label="open drawer"
             className={classes.whiteColor}
+            onClick={toggleDrawer('left', true)}
           >
-            <MenuIcon />
+            <MenuIcon /> 
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             Home Page
@@ -187,10 +235,10 @@ export default function Header(props) {
             />
           </Box>
           <Box>
-            <Button variant="contained" onClick={props.changeTheme}>
+            <Button variant="contained" size='small' onClick={props.changeTheme}>
               dark
             </Button>
-            <Button variant="contained" onClick={props.changeTheme}>
+            <Button variant="contained" size='small' onClick={props.changeTheme}>
               default
             </Button>
           </Box>
