@@ -34,17 +34,9 @@ export default function Footer() {
       className={classes.root}
       color='secondary'
     >
-      <BottomNavigationAction label="Sign-Up" icon={<FavoriteIcon />} />
-      <BottomNavigationAction label="Login" icon={<LocationOnIcon />} />
-      <BottomNavigationAction label="Login" icon={<LocationOnIcon />} />
-      <BottomNavigationAction label="Login" icon={<LocationOnIcon />} />
-      <BottomNavigationAction label="Login" icon={<LocationOnIcon />} />
-      <BottomNavigationAction label="Login" icon={<LocationOnIcon />} />
-      <BottomNavigationAction label="Login" icon={<LocationOnIcon />} />
-      <BottomNavigationAction label="Login" icon={<LocationOnIcon />} />
-      <BottomNavigationAction label="Login" icon={<LocationOnIcon />} />
-      <BottomNavigationAction label="Login" icon={<LocationOnIcon />} />
-      <BottomNavigationAction label="Login" icon={<LocationOnIcon />} />
+      <BottomNavigationAction component={NavLink} to={`/`} label="Home" icon={<FavoriteIcon />} />
+      <BottomNavigationAction component={NavLink} to={`/registration`} label="Sign-Up" icon={<LocationOnIcon />} />
+      <BottomNavigationAction component={NavLink} to={`/login`} label="Login" icon={<LocationOnIcon />} />
     </BottomNavigation>
   </Box>
   );

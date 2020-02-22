@@ -8,7 +8,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -85,6 +85,12 @@ const useStyles = makeStyles(theme => ({
   menuTitle: {
     fontWeight: '600',
     padding: '20px'
+  },
+  logOut: {
+    color: '#cc0000',
+  },
+  menuList: {
+    color: '#000000'
   }
 }));
 
@@ -92,7 +98,7 @@ export default function Header(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const [login, setLogin] = React.useState(true)
+  const [login, setLogin] = React.useState(false)
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const menuId = 'primary-search-account-menu';
@@ -137,12 +143,18 @@ export default function Header(props) {
       <Typography variant='h4' className={classes.menuTitle}>Menu</Typography>
             <Divider color='primary' />
       <List>
-        {['Home', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
-            <Divider />
+          <ListItem button component={NavLink} to={'/'}>
+            <ListItemText primary={'Home'} />
           </ListItem>
-        ))}
+          <ListItem button component={NavLink} to={'/profile'}>
+            <ListItemText primary={'Profile'} />
+          </ListItem>
+          <ListItem button component={NavLink} to={'/settings'}>
+            <ListItemText primary={'Settings'} />
+          </ListItem>
+          <ListItem button className={classes.logOut}>
+            <ListItemText primary={'Logout'} />
+          </ListItem>
       </List>
     </Box>
   );
@@ -156,9 +168,10 @@ export default function Header(props) {
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMenuOpen}
       onClose={handleMenuClose}
+      color='success.main'
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose} component={NavLink} to={'profile'} className={classes.menuList}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose} component={NavLink} to={'settings'} className={classes.menuList}>My account</MenuItem>
     </Menu>
   );
 
@@ -173,16 +186,16 @@ export default function Header(props) {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label="show 4 new mails">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
+        <IconButton aria-label="show 4 new mails" component={NavLink} to={'/additempage'}>
+          <Badge badgeContent={0} color="error">
+            <AddIcon />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <p>Add Item</p>
       </MenuItem>
       <MenuItem>
         <IconButton aria-label="show 11 new notifications">
-          <Badge badgeContent={1} color="error">
+          <Badge badgeContent={0} color="error">
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -256,9 +269,9 @@ export default function Header(props) {
               </Box>
               :
               <Box>
-                <IconButton aria-label="show 4 new mails" className={classes.whiteColor}>
+                <IconButton aria-label="show 4 new mails" className={classes.whiteColor} component={NavLink} to={'/additempage'}>
                   <Badge badgeContent={0} color="error">
-                    <MailIcon />
+                    <AddIcon />
                   </Badge>
                 </IconButton>
                 <IconButton aria-label="show 17 new notifications" className={classes.whiteColor}>
