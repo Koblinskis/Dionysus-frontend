@@ -15,7 +15,6 @@ export default function Home(props) {
 
   return (
     <div className={classes.root}>
-      {console.log(props)}
       <Button variant="contained">Default</Button>
       <Button variant="contained" color="primary" onClick={props.changeTheme}>
         dark

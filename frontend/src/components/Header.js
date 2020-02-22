@@ -152,6 +152,9 @@ export default function Header(props) {
           <ListItem button component={NavLink} to={'/settings'}>
             <ListItemText primary={'Settings'} />
           </ListItem>
+          <ListItem button component={NavLink} to={'/about'}>
+            <ListItemText primary={'About'} />
+          </ListItem>
           <ListItem button className={classes.logOut}>
             <ListItemText primary={'Logout'} />
           </ListItem>
