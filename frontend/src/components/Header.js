@@ -5,10 +5,13 @@ import { AppBar, Toolbar, Box, IconButton, MenuItem, Button, Typography, InputBa
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import AddIcon from '@material-ui/icons/Add';
+import SettingsIcon from '@material-ui/icons/Settings';
+import InfoIcon from '@material-ui/icons/Info';
+import HomeIcon from '@material-ui/icons/Home';
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -145,18 +148,23 @@ export default function Header(props) {
       <List>
           <ListItem button component={NavLink} to={'/'}>
             <ListItemText primary={'Home'} />
+            <HomeIcon />
           </ListItem>
           <ListItem button component={NavLink} to={'/profile'}>
             <ListItemText primary={'Profile'} />
+            <AccountCircle />
           </ListItem>
           <ListItem button component={NavLink} to={'/settings'}>
             <ListItemText primary={'Settings'} />
+            <SettingsIcon />
           </ListItem>
           <ListItem button component={NavLink} to={'/about'}>
             <ListItemText primary={'About'} />
+            <InfoIcon />
           </ListItem>
           <ListItem button className={classes.logOut}>
             <ListItemText primary={'Logout'} />
+            <ExitToAppIcon />
           </ListItem>
       </List>
     </Box>
@@ -174,7 +182,8 @@ export default function Header(props) {
       color='success.main'
     >
       <MenuItem onClick={handleMenuClose} component={NavLink} to={'profile'} className={classes.menuList}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose} component={NavLink} to={'settings'} className={classes.menuList}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose} component={NavLink} to={'settings'} className={classes.menuList}>Settings</MenuItem>
+      <MenuItem onClick={handleMenuClose} className={classes.logOut}>Logout</MenuItem>
     </Menu>
   );
 
@@ -188,8 +197,8 @@ export default function Header(props) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" component={NavLink} to={'/additempage'}>
+      <MenuItem component={NavLink} to={'/additempage'}>
+        <IconButton aria-label="show 4 new mails">
           <Badge badgeContent={0} color="error">
             <AddIcon />
           </Badge>
@@ -204,7 +213,7 @@ export default function Header(props) {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem component={NavLink} to={'profile'}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
@@ -213,6 +222,26 @@ export default function Header(props) {
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
+      </MenuItem>
+      <MenuItem component={NavLink} to={'settings'}>
+        <IconButton
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+        >
+          <SettingsIcon />
+        </IconButton>
+        <p>Settings</p>
+      </MenuItem>
+      <MenuItem className={classes.logOut}>
+        <IconButton
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+        >
+          <ExitToAppIcon />
+        </IconButton>
+        <p>Logout</p>
       </MenuItem>
     </Menu>
   );
