@@ -35,3 +35,34 @@ exports.user_logout_post = async (req, res) => {
     res.status(500).send()
   }
 }
+
+exports.user_remove_delete = async (req, res) => {
+  try {
+    await req.user.remove()
+    res.send(req.user)
+  } catch (e) {
+    res.status(500).send()
+  }
+}
+
+exports.user_profile_get = async (req, res) => {
+  res.send(req.user)
+}
+
+exports.user_profile_patch = async (req, res) => {
+  const updates = Object.keys(req.body)
+  const allowedUpdates = ['userName', 'email', 'password', 'age', 'name']
+  const isVaildOperation = updates.every((update) => allowedUpdates.includes(update))
+
+  if (!isVaildOperation) {
+    return res.status(400).send({ error: 'Invaild updates!' })
+  }
+
+  try {
+    updates.forEach((update) => req.user[update] = req.body[update])
+    await req.user.save()
+    res.send(req.user)
+  } catch (e) {
+    res.status(400).send(e)
+  }
+}

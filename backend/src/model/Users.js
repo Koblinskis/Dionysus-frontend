@@ -28,12 +28,20 @@ const userSchema = new mongoose.Schema({
     trim: true,
     minlength: 6
   },
+  age: {
+    type: Number,
+    default: 0
+  },
+  name: {
+    type: String,
+    default: 'Anonymous'
+  },
   tokens: [{
     token: {
       type: String,
       required: true
     }
-  }]
+  }],
 })
 
 userSchema.methods.generateAuthToken = async function () {
