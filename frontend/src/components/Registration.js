@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom';
-import { Typography, Box, TextField } from '@material-ui/core';
+import { Typography, Box, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import validator from 'validator'
 
 const useStyles = makeStyles(theme => ({
   signUp: {
@@ -36,14 +37,85 @@ const useStyles = makeStyles(theme => ({
   },
   bottomText: {
     marginTop: '30px'
+  },
+  white: {
+    textDecoration: 'none'
   }
 }))
 
 export default function Registration() {
   const classes = useStyles()
+
+  const [userName, setUserName] = React.useState(undefined)
+  const [email, setEmail] = React.useState(undefined)
+  const [userPassword, setUserPassword] = React.useState(undefined)
+  const [confirmPassword, setConfirmPassword] = React.useState(undefined)
+  const [password, setPassword] = React.useState(undefined)
+  const [submit, setSubmit] = React.useState(true)
+
+  React.useEffect(() => {
+    checkInputs()
+  })
+
+  const handleUserNameChange = (e) => {
+    e.preventDefault()
+    
+    if (e.target.value.length > 5) {
+      setUserName(e.target.value)
+    } else
+    setUserName(undefined)
+  }
+
+  const handleEmailChange = (e) => {
+    e.preventDefault()
+    if (e.target !== '') {
+      if (validator.isEmail(e.target.value.toLowerCase())) {
+        setEmail(e.target.value)
+        checkInputs()
+      } else {
+        return setEmail(undefined)
+      }
+    } else
+    setEmail(undefined)
+  }
+
+  const handlePasswordChange = (e) => {
+    e.preventDefault()
+    if (e.target.value.length > 5) {
+      setUserPassword(e.target.value)
+      checkInputs()
+    } else
+    setUserPassword(undefined)
+  }
+
+  const handleConfirmPasswordChange = (e) => {
+    e.preventDefault()
+    checkInputs()
+    if (e.target.value.length > 5) {
+      setConfirmPassword(e.target.value)
+      checkInputs()
+    } else
+    setConfirmPassword(undefined)
+  }
+
+  const checkPassword = () => {
+    if (confirmPassword === userPassword) {
+      return setPassword(userPassword)
+    }
+    setPassword(undefined)
+  }
+
+  const checkInputs = () => {
+    checkPassword()
+    if (userName && email && password) {
+      setSubmit(false)
+    } else {
+      setSubmit(true)
+    }
+  }
+
   return (
     <Box className={classes.center}>
-      {console.log(TextField)}
       <Box bgcolor='success.main' border={1} className={classes.signUp}>
         <Typography variant="h4" component="h2" color='secondary' className={classes.signUpTitle}>
           Registration
@@ -55,6 +127,8 @@ export default function Registration() {
             label="Username"
             autoFocus
             color='secondary'
+            defaultValue={userName}
+            onChange={handleUserNameChange}
             className={classes.inputFields}
           />
           <TextField
@@ -62,6 +136,8 @@ export default function Registration() {
             id="standard-basic"
             label="Email"
             color='secondary'
+            defaultValue={email}
+            onChange={handleEmailChange}
             className={classes.inputFields}
           />
           <TextField
@@ -71,6 +147,7 @@ export default function Registration() {
             type="password"
             autoComplete="current-password"
             color='secondary'
+            onChange={handlePasswordChange}
             className={classes.inputFields}
           />
           <TextField
@@ -80,11 +157,13 @@ export default function Registration() {
             type="password"
             autoComplete="current-password"
             color='secondary'
+            onChange={handleConfirmPasswordChange}
             className={classes.inputFields}
           />
-        </Box>
+        </Box><br/>
+        <Button variant="contained" disabled={submit}>Sign-Up</Button>
         <Box className={classes.bottomText}>
-          <Typography variant="caption" color='secondary'>Have an account <NavLink to="/login" color='secondary'>Login</NavLink></Typography>
+          <Typography variant="caption" color='secondary'>Have an account <NavLink to="/login" className={classes.white}>Login</NavLink></Typography>
         </Box>
       </Box>
     </Box>
