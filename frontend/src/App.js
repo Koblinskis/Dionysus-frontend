@@ -24,9 +24,9 @@ const darkTheme = createMuiTheme({
       dark: '#002233'
     },
     error: {
-      main: '#d32f2f',
-      light: '#d32f2f',
-      dark: '#d32f2f'
+      main: '#ff4d4d',
+      light: '#ff9999',
+      dark: '#ff9999'
     },
     warning: {
       main: '#f57c00',
@@ -74,9 +74,9 @@ const defTheme = createMuiTheme({
       dark: '#002233'
     },
     error: {
-      main: '#d32f2f',
-      light: '#d32f2f',
-      dark: '#d32f2f'
+      main: '#e60000',
+      light: '#e60000',
+      dark: '#e60000'
     },
     warning: {
       main: '#f57c00',

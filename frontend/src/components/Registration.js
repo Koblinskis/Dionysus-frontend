@@ -126,6 +126,8 @@ export default function Registration() {
             id="standard-basic"
             label="Username"
             autoFocus
+            error={!userName}
+            helperText='Must be 6 characters long'
             color='secondary'
             defaultValue={userName}
             onChange={handleUserNameChange}
@@ -136,6 +138,8 @@ export default function Registration() {
             id="standard-basic"
             label="Email"
             color='secondary'
+            error={!email}
+            helperText='Enter a vaild Email'
             defaultValue={email}
             onChange={handleEmailChange}
             className={classes.inputFields}
@@ -145,6 +149,8 @@ export default function Registration() {
             id="standard-password-input"
             label="Password"
             type="password"
+            error={!password}
+            helperText='Must be 6 characters long'
             autoComplete="current-password"
             color='secondary'
             onChange={handlePasswordChange}
@@ -155,6 +161,8 @@ export default function Registration() {
             id="standard-password-input"
             label="Comfirm Password"
             type="password"
+            error={!password}
+            helperText='Passwords must match'
             autoComplete="current-password"
             color='secondary'
             onChange={handleConfirmPasswordChange}
