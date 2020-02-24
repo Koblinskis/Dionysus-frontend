@@ -45,7 +45,9 @@ const useStyles = makeStyles(theme => ({
 
 export default function Registration() {
   const classes = useStyles()
-
+  const [first, setFirst] = React.useState(0)
+  const [second, setSecond] = React.useState(0)
+  const [third, setThird] = React.useState(0)
   const [userName, setUserName] = React.useState(undefined)
   const [email, setEmail] = React.useState(undefined)
   const [userPassword, setUserPassword] = React.useState(undefined)
@@ -59,6 +61,7 @@ export default function Registration() {
 
   const handleUserNameChange = (e) => {
     e.preventDefault()
+    setFirst(1)
     
     if (e.target.value.length > 5) {
       setUserName(e.target.value)
@@ -68,6 +71,7 @@ export default function Registration() {
 
   const handleEmailChange = (e) => {
     e.preventDefault()
+    setSecond(1)
     if (e.target !== '') {
       if (validator.isEmail(e.target.value.toLowerCase())) {
         setEmail(e.target.value)
@@ -81,6 +85,7 @@ export default function Registration() {
 
   const handlePasswordChange = (e) => {
     e.preventDefault()
+    setThird(1)
     if (e.target.value.length > 5) {
       setUserPassword(e.target.value)
       checkInputs()
@@ -90,6 +95,7 @@ export default function Registration() {
 
   const handleConfirmPasswordChange = (e) => {
     e.preventDefault()
+    setThird(1)
     checkInputs()
     if (e.target.value.length > 5) {
       setConfirmPassword(e.target.value)
@@ -126,7 +132,7 @@ export default function Registration() {
             id="standard-basic"
             label="Username"
             autoFocus
-            error={!userName}
+            error={!userName && first}
             helperText='Must be 6 characters long'
             color='secondary'
             defaultValue={userName}
@@ -138,7 +144,7 @@ export default function Registration() {
             id="standard-basic"
             label="Email"
             color='secondary'
-            error={!email}
+            error={!email && second}
             helperText='Enter a vaild Email'
             defaultValue={email}
             onChange={handleEmailChange}
@@ -149,7 +155,7 @@ export default function Registration() {
             id="standard-password-input"
             label="Password"
             type="password"
-            error={!password}
+            error={!userPassword && third}
             helperText='Must be 6 characters long'
             autoComplete="current-password"
             color='secondary'
@@ -161,7 +167,7 @@ export default function Registration() {
             id="standard-password-input"
             label="Comfirm Password"
             type="password"
-            error={!password}
+            error={!password && third}
             helperText='Passwords must match'
             autoComplete="current-password"
             color='secondary'
