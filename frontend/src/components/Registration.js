@@ -169,7 +169,7 @@ export default function Registration() {
             className={classes.inputFields}
           />
         </Box><br/>
-        <Button variant="contained" disabled={submit}>Sign-Up</Button>
+        <Button variant="contained" color="primary" disabled={submit}>Sign-Up</Button>
         <Box className={classes.bottomText}>
           <Typography variant="caption" color='secondary'>Have an account <NavLink to="/login" className={classes.white}>Login</NavLink></Typography>
         </Box>
