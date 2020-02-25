@@ -94,6 +94,18 @@ const useStyles = makeStyles(theme => ({
   },
   menuList: {
     color: '#000000'
+  },
+  menuSList: {
+    color: '#000000'
+  },
+  menuWList: {
+    color: '#000000'
+  },
+  menuEList: {
+    color: '#000000'
+  },
+  menuRList: {
+    color: '#000000'
   }
 }));
 
