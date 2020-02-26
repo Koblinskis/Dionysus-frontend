@@ -1,5 +1,4 @@
 import React from "react";
-import { hot } from "react-hot-loader";
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core'
 import AppRouter from './router/AppRouter'
@@ -131,4 +130,4 @@ function App() {
   );
 }
 
-export default hot(module)(App);
+export default App;
