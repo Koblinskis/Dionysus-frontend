@@ -119,7 +119,7 @@ export default function Registration() {
 
   const postUser = async (data) => {
     try {
-      const res = await fetch('/registration', {
+      const res = await fetch('http://localhost:8000/registration', {
         method: 'POST',
         header: {
           'Content-Type': 'application/json',
