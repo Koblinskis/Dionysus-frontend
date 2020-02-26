@@ -117,6 +117,26 @@ export default function Registration() {
     }
   }
 
+  const postUser = async (data) => {
+    try {
+      const res = await fetch('/registration', {
+        method: 'POST',
+        header: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+      console.log(res)
+    } catch (e) {
+      console.error('Error:', e)
+    }
+  }
+
+  const createUser = async () => {
+    const data = { userName, email, password }
+    await postUser(data)
+  }
+
   return (
     <Box className={classes.center}>
       <Box bgcolor='success.main' border={1} className={classes.signUp}>
@@ -172,7 +192,7 @@ export default function Registration() {
             className={classes.inputFields}
           />
         </Box><br/>
-        <Button variant="contained" color="primary" disabled={submit}>Sign-Up</Button>
+        <Button variant="contained" color="primary" disabled={submit} onClick={createUser}>Sign-Up</Button>
         <Box className={classes.bottomText}>
           <Typography variant="caption" color='secondary'>Have an account <NavLink to="/login">Login</NavLink></Typography>
         </Box>
