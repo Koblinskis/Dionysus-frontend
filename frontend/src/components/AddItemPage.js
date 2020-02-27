@@ -1,11 +1,12 @@
 import React from 'react'
-import { Box, Typography, FormControl, Select, MenuItem, InputLabel } from '@material-ui/core';
+import { Box, Typography, FormControl, Select, MenuItem, InputLabel, TextField, Grid, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 const useStyles = makeStyles(theme => ({
-  signUp: {
+  formControl: {
     margin: '30px',
-    maxWidth: 400,
+    maxWidth: 750,
     display: 'flex',
     flexDirection: 'column',
     padding: '40px',
@@ -16,6 +17,14 @@ const useStyles = makeStyles(theme => ({
     alignContent: 'center',
     textAlign: 'center',
   },
+  listItems: {
+    paddingTop: '20px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignContent: 'space-around',
+    minHeight: '60px',
+  },
   center: {
     display: 'flex',
     justifyContent: 'center'
@@ -24,8 +33,10 @@ const useStyles = makeStyles(theme => ({
 
 export default function AddItemPage() {
   const classes = useStyles()
+  let counter = 0;
   const [dataStructure, setDataStructure] = React.useState('');
   const [form, setForm] = React.useState(undefined)
+  const [listItems, setListItems] = React.useState([])
 
   const handleChange = async event => {
     setDataStructure(event.target.value);
@@ -36,7 +47,7 @@ export default function AddItemPage() {
     console.log(dataStructure)
     switch (dataStructure) {
       case 10:
-        setForm(<h1>List</h1>)
+        setForm(list)
         break;
       case 20:
         setForm(<h1>Chart</h1>)
@@ -52,18 +63,35 @@ export default function AddItemPage() {
 
   const list = () => {
     return (
-      <FormControl>
-        <InputLabel id="demo-simple-select-label">Type of field</InputLabel>
-      </FormControl>
+      <Box className={classes.listItems}>
+        <Grid container spacing={6} md={12} sm={12} xs={12}>
+          {listItems.map((el, index) => el)}
+          {console.log(listItems)}
+        </Grid>
+        <br/>
+        <Button color="secondary" onClick={addItemsList}>
+            <AddCircleIcon />   Add Item
+        </Button>
+      </Box>
     )
+  }
+
+  const addItemsList = () => {
+    counter++;
+    let items = (<Grid item >
+      <TextField color="secondary" id="standard-basic" label={`Item ${counter}`} />
+      <br/>
+      <TextField color="secondary" id="standard-basic" label={`Decsription ${counter}`} />
+    </Grid>)
+    setListItems((preItems) => preItems.concat(items))
   }
 
   return (
     <Box className={classes.center}>
-      <Box bgcolor='success.main' border={1} className={classes.signUp}>
+      <Box bgcolor='success.main' border={1} className={classes.formControl}>
         <Typography variant='h3' color='secondary'>Choose a Format</Typography>
         
-      <FormControl className={classes.formControl}>
+      <FormControl>
         <InputLabel id="demo-simple-select-label">Type of field</InputLabel>
         <Select
           labelId="demo-simple-select-label"
