@@ -64,7 +64,7 @@ export default function AddItemPage() {
   const list = () => {
     return (
       <Box className={classes.listItems}>
-        <Grid container spacing={6} md={12} sm={12} xs={12}>
+        <Grid container spacing={6} >
           {listItems.map((el, index) => el)}
           {console.log(listItems)}
         </Grid>
@@ -78,7 +78,7 @@ export default function AddItemPage() {
 
   const addItemsList = () => {
     counter++;
-    let items = (<Grid item >
+    let items = (<Grid item md={4} sm={12} xs={12}>
       <TextField color="secondary" id="standard-basic" label={`Item ${counter}`} />
       <br/>
       <TextField color="secondary" id="standard-basic" label={`Decsription ${counter}`} />
