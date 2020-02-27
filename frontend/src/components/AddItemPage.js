@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Box, Typography, FormControl, Select, MenuItem, InputLabel, TextField, Grid, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import { v4 as uuidv4 } from 'uuid'
 
 const useStyles = makeStyles(theme => ({
   formControl: {
@@ -34,16 +35,16 @@ const useStyles = makeStyles(theme => ({
 
 export default function AddItemPage() {
   const classes = useStyles()
-  let counter = 1;
+  const id = uuidv4();
   const [dataStructure, setDataStructure] = React.useState('');
   const [form, setForm] = React.useState(undefined)
   const [listItems, setListItems] = React.useState(new Map())
 
   useEffect(() => {
-    setListItems(listItems.set(counter, (<Grid item md={4} sm={12} xs={12} key={counter}>
-      <TextField key={counter} color="secondary" id="standard-basic" label={`Item ${counter}`} />
+    setListItems(listItems.set(id, (<Grid item md={4} sm={12} xs={12} key={uuidv4()}>
+      <TextField key={uuidv4()} color="secondary" id="standard-basic" label={`Item`} />
       <br/>
-      <TextField key={-1 * counter} color="secondary" id="standard-basic" label={`Decsription ${counter}`} />
+      <TextField key={uuidv4()} color="secondary" id="standard-multiline-flexible" multiline rowsMax="4" label={`Decsription`} />
     </Grid>)))
   }, [])
 
@@ -74,26 +75,24 @@ export default function AddItemPage() {
     return (
       <Box className={classes.listItems}>
         <Grid container spacing={6} >
-          {[...listItems.keys()].map((el) => (listItems.get(el)))}
-          {console.log(listItems)}
+          {[...listItems.keys()].map(k => listItems.get(k))}
         </Grid>
         <br/>
         <Button color="secondary" onClick={addItemsList}>
-            <AddCircleIcon />   Add Item
+            <AddCircleIcon />Add Item
         </Button>
       </Box>
     )
   }
 
   const addItemsList = () => {
-    counter++;
-    {console.log(listItems)}
-    let items = (<Grid item md={4} sm={12} xs={12} key={counter}>
-      <TextField key={counter} color="secondary" id="standard-basic" label={`Item ${counter}`} />
+    let id2 = uuidv4();
+    let items = (<Grid item md={4} sm={12} xs={12} key={uuidv4()}>
+      <TextField key={uuidv4()} color="secondary" id="standard-basic" label={`Item`} />
       <br/>
-      <TextField key={-1 * counter} color="secondary" id="standard-basic" label={`Decsription ${counter}`} />
+      <TextField key={uuidv4()} color="secondary" id="standard-multiline-flexible" multiline rowsMax="4" label={`Decsription`} />
     </Grid>)
-    setListItems(new Map(listItems.set(counter, items)))
+    setListItems(new Map(listItems.set(id2, items)))
   }
 
   return (
