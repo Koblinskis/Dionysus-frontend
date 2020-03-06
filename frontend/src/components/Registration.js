@@ -119,14 +119,13 @@ export default function Registration() {
 
   const postUser = async (data) => {
     try {
-      const res = await fetch('http://localhost:8000/registration', {
+      const res = await fetch(process.env.REACT_APP_NODE_URL + 'registration', {
         method: 'POST',
-        header: {
+        headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data)
       })
-      console.log(res)
     } catch (e) {
       console.error('Error:', e)
     }

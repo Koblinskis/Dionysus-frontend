@@ -1,15 +1,13 @@
 const Users = require('../model/Users')
-const auth = require('../middleware/auth')
 
 exports.user_signup_post = async function(req, res) {
   const user = new Users(req.body)
-
   try {
     await user.save()
     const token = await user.generateAuthToken()
     res.status(201).send({ user, token })
   } catch (e) {
-    res.status(500).send()
+    res.status(500).send(e)
   }
 }
 
