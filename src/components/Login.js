@@ -1,7 +1,9 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { Typography, Box, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import validator from 'validator'
+import { useCookie, useCookies } from 'react-cookie'
 
 const useStyles = makeStyles(theme => ({
   signUp: {
@@ -41,8 +43,77 @@ const useStyles = makeStyles(theme => ({
 
 export default function Login() {
   const classes = useStyles();
+  const [cookie, setCookie] = useCookies()
+  const [userInfo, setUserInfo] = React.useState(undefined)
+  const [field1, setField1] = React.useState(undefined)
+  const [fieldType, setFieldType] = React.useState(undefined)
+  const [password, setPassword] = React.useState(undefined)
+  const [submit, setSubmit] = React.useState(true)
+
+  React.useEffect(() => {
+    checkInputs()
+  })
+
+  const handleField1Change = (e) => {
+    e.preventDefault()
+    if (e.target !== '') {
+      if (validator.isEmail(e.target.value.toLowerCase())) {
+        setField1(e.target.value)
+        return setFieldType('email')
+      }
+      if (e.target.value.length > 5) {
+        setField1(e.target.value)
+        return setFieldType('userName')
+      }
+    } else {
+      setField1(undefined)
+    }
+  }
+
+  const handlePasswordChange = (e) => {
+    e.preventDefault()
+    if (e.target.value.length > 5) {
+      setPassword(e.target.value)
+    } else {
+      setPassword(undefined)
+    }
+  }
+
+  const postLogin = async (data) => {
+    try {
+      const res = await fetch(process.env.REACT_APP_NODE_URL + 'login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+      const resObj = await res.json()
+      return resObj.token
+    } catch (e) {
+      console.error('Error:', e)
+    }
+  }
+
+  const checkLogin = async () => {
+    const data = { [fieldType]: field1, password }
+    const userToken = await postLogin(data)
+    if (userToken !== undefined) {
+      setCookie('token', userToken)
+    }
+  }
+
+  const checkInputs = () => {
+    if (field1 && password) {
+      setSubmit(false)
+    } else {
+      setSubmit(true)
+    }
+  }
+
   return (
     <Box className={classes.center}>
+    {cookie.token && <Redirect to={'/additempage'}></Redirect>}
       <Box bgcolor='success.main' border={1} className={classes.signUp}>
         <Typography variant="h4" component="h2" color='secondary' className={classes.signUpTitle}>
           Login
@@ -54,6 +125,8 @@ export default function Login() {
             label="Username"
             autoFocus
             color='secondary'
+            defaultValue={field1}
+            onChange={handleField1Change}
             className={classes.inputFields}
           />
           <TextField
@@ -63,10 +136,12 @@ export default function Login() {
             type="password"
             autoComplete="current-password"
             color='secondary'
+            defaultValue={password}
+            onChange={handlePasswordChange}
             className={classes.inputFields}
           />
-      </Box>
-      <Button variant="contained" color="primary">Login</Button>
+      </Box><br/>
+      <Button variant="contained" color="primary" disabled={submit} onClick={checkLogin}>Login</Button>
       <Box className={classes.bottomText}>
         <Typography variant="caption" color='secondary'>Don't have an account <NavLink to="/registration" color='secondary'>Signup</NavLink></Typography>
       </Box>
