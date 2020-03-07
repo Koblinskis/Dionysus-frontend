@@ -281,7 +281,7 @@ export default function Header(props) {
           {sideList('left')}
         </Drawer>
         <Toolbar>
-          <IconButton
+          {!login && <IconButton
             edge="start"
             className={classes.menuButton}
             aria-label="open drawer"
@@ -289,7 +289,7 @@ export default function Header(props) {
             onClick={toggleDrawer('left', true)}
           >
             <MenuIcon /> 
-          </IconButton>
+          </IconButton>}
           <Typography className={classes.title} variant="h6" noWrap>
             Home Page
           </Typography>
