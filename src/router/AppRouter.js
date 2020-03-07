@@ -11,6 +11,8 @@ import About from '../components/About'
 import Settings from '../components/Settings'
 import Profile from '../components/Profile'
 import AddItemPage from '../components/AddItemPage'
+import PrivateRouter from './PrivateRouter'
+import PublicRouter from './PublicRouter'
 
 const useStyles = makeStyles(theme => ({
   fullPage: {
@@ -30,9 +32,9 @@ export default function AppRouter(props) {
             <Route path="/registration" component={Registration} />
             <Route path="/login" component={Login} />
             <Route path="/about" component={About} />
-            <Route path="/settings" component={Settings} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/additempage" component={AddItemPage} />
+            <PrivateRouter path="/settings" component={Settings} />
+            <PrivateRouter path="/profile" component={Profile} />
+            <PrivateRouter path="/additempage" component={AddItemPage} />
           </Switch>
         </Box>
         <Divider />
