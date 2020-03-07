@@ -6,7 +6,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import AddIcon from '@material-ui/icons/Add';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -232,14 +231,6 @@ export default function Header(props) {
         </IconButton>
         <p>Add Item</p>
       </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications">
-          <Badge badgeContent={0} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
       <MenuItem component={NavLink} to={'profile'}>
         <IconButton
           aria-label="account of current user"
@@ -293,20 +284,6 @@ export default function Header(props) {
           <Typography className={classes.title} variant="h6" noWrap>
             Home Page
           </Typography>
-          <Box className={classes.search}>
-            <Box className={classes.searchIcon}>
-              <SearchIcon />
-            </Box>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Box>
           <Box>
             <Button variant="contained" size='small' onClick={props.changeTheme}>
               dark
@@ -333,11 +310,6 @@ export default function Header(props) {
                 <IconButton aria-label="show 4 new mails" className={classes.whiteColor} component={NavLink} to={'/additempage'}>
                   <Badge badgeContent={0} color="error">
                     <AddIcon />
-                  </Badge>
-                </IconButton>
-                <IconButton aria-label="show 17 new notifications" className={classes.whiteColor}>
-                  <Badge badgeContent={0} color="error">
-                    <NotificationsIcon />
                   </Badge>
                 </IconButton>
                 <IconButton

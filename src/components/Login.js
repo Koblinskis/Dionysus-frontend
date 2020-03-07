@@ -92,6 +92,7 @@ export default function Login() {
       return resObj.token
     } catch (e) {
       console.error('Error:', e)
+      alert('Invaild User')
     }
   }
 
@@ -143,7 +144,7 @@ export default function Login() {
       </Box><br/>
       <Button variant="contained" color="primary" disabled={submit} onClick={checkLogin}>Login</Button>
       <Box className={classes.bottomText}>
-        <Typography variant="caption" color='secondary'>Don't have an account <NavLink to="/registration" color='secondary'>Signup</NavLink></Typography>
+        <Typography variant="caption" color='secondary'>Don't have an account? <NavLink to="/registration" color='secondary'>Signup</NavLink></Typography>
       </Box>
     </Box>
   </Box>

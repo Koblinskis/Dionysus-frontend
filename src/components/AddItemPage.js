@@ -40,13 +40,13 @@ export default function AddItemPage() {
   const [form, setForm] = React.useState(undefined)
   const [listItems, setListItems] = React.useState(new Map())
 
-  useEffect(() => {
-    setListItems(listItems.set(id, (<Grid item md={4} sm={12} xs={12} key={uuidv4()}>
-      <TextField key={uuidv4()} color="secondary" id="standard-basic" label={`Item`} />
-      <br/>
-      <TextField key={uuidv4()} color="secondary" id="standard-multiline-flexible" multiline rowsMax="4" label={`Decsription`} />
-    </Grid>)))
-  }, [])
+  // useEffect(() => {
+  //   setListItems(listItems.set(id, (<Grid item md={4} sm={12} xs={12} key={uuidv4()}>
+  //     <TextField key={uuidv4()} color="secondary" id="standard-basic" label={`Item`} />
+  //     <br/>
+  //     <TextField key={uuidv4()} color="secondary" id="standard-multiline-flexible" multiline rowsMax="4" label={`Decsription`} />
+  //   </Grid>)))
+  // }, [])
 
   const handleChange = async event => {
     setDataStructure(event.target.value);
@@ -57,7 +57,7 @@ export default function AddItemPage() {
     console.log(dataStructure)
     switch (dataStructure) {
       case 10:
-        setForm(list)
+        setForm(list())
         break;
       case 20:
         setForm(<h1>Chart</h1>)
@@ -72,6 +72,7 @@ export default function AddItemPage() {
   }
 
   const list = () => {
+    console.log(listItems)
     return (
       <Box className={classes.listItems}>
         <Grid container spacing={6} >
@@ -92,17 +93,20 @@ export default function AddItemPage() {
       <br/>
       <TextField key={uuidv4()} color="secondary" id="standard-multiline-flexible" multiline rowsMax="4" label={`Decsription`} />
     </Grid>)
-    setListItems(new Map(listItems.set(id2, items)))
+    const newMap = new Map(listItems.set(id2, items))
+    setListItems(newMap)
   }
 
   return (
     <Box className={classes.center}>
       <Box bgcolor='success.main' border={1} className={classes.formControl}>
-        <Typography variant='h3' color='secondary'>Choose a Format</Typography>
+        <Typography variant='h3' color='secondary'>List</Typography>
+        {console.log(listItems)}
         
-      <FormControl>
+      {/* <FormControl>
         <InputLabel id="demo-simple-select-label" color="secondary">Type of field</InputLabel>
-        <Select
+        
+        {/* <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={dataStructure}
@@ -111,10 +115,10 @@ export default function AddItemPage() {
           <MenuItem value={10}>List</MenuItem>
           <MenuItem value={20}>Chart</MenuItem>
           <MenuItem value={30}>Graph</MenuItem>
-        </Select>
-      </FormControl>
-      {dataStructure ? form : undefined}
-
+        </Select> 
+      </FormControl> */}
+      {/* {dataStructure ? form : undefined} */}
+        {list()}
       </Box>
     </Box>
   )
