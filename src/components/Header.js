@@ -12,6 +12,7 @@ import AddIcon from '@material-ui/icons/Add';
 import SettingsIcon from '@material-ui/icons/Settings';
 import InfoIcon from '@material-ui/icons/Info';
 import HomeIcon from '@material-ui/icons/Home';
+import { useCookies } from 'react-cookie'
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -113,11 +114,19 @@ export default function Header(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const [login, setLogin] = React.useState(false)
+  const [login, setLogin] = React.useState(true)
+  const [cookie, setCookie, removeCookie] = useCookies(['token'])
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const menuId = 'primary-search-account-menu';
   const mobileMenuId = 'primary-search-account-menu-mobile';
+
+  React.useEffect(() => {
+    console.log(cookie.token)
+    if(cookie.token !== undefined){
+      setLogin(false)
+    }
+  }, [cookie])
 
   const handleProfileMenuOpen = event => {
     setAnchorEl(event.currentTarget);
@@ -147,6 +156,12 @@ export default function Header(props) {
     setState({ ...state, [side]: open });
   };
 
+  const logout = () => {
+    removeCookie('token')
+    setLogin(true)
+    handleMenuClose()
+  }
+
   const sideList = side => (
     <Box
       className={classes.list}
@@ -174,7 +189,7 @@ export default function Header(props) {
             <ListItemText primary={'About'} />
             <InfoIcon />
           </ListItem>
-          <ListItem button className={classes.logOut}>
+          <ListItem button onClick={logout} className={classes.logOut}>
             <ListItemText primary={'Logout'} />
             <ExitToAppIcon />
           </ListItem>
@@ -195,7 +210,7 @@ export default function Header(props) {
     >
       <MenuItem onClick={handleMenuClose} component={NavLink} to={'profile'} className={classes.menuList}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose} component={NavLink} to={'settings'} className={classes.menuList}>Settings</MenuItem>
-      <MenuItem onClick={handleMenuClose} className={classes.logOut}>Logout</MenuItem>
+      <MenuItem onClick={logout} className={classes.logOut}>Logout</MenuItem>
     </Menu>
   );
 
@@ -250,6 +265,7 @@ export default function Header(props) {
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
+          onClick={logout}
         >
           <ExitToAppIcon />
         </IconButton>
@@ -298,6 +314,7 @@ export default function Header(props) {
             <Button variant="contained" size='small' onClick={props.changeTheme}>
               default
             </Button>
+            
           </Box>
           <Box className={classes.grow} />
           <Box className={classes.sectionDesktop}>

@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect, withRouter } from 'react-router-dom';
 import { Typography, Box, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { useCookies } from 'react-cookie'
 import validator from 'validator'
+import Home from './Home'
 
 const useStyles = makeStyles(theme => ({
   signUp: {
@@ -51,6 +53,7 @@ export default function Registration() {
   const [confirmPassword, setConfirmPassword] = React.useState(undefined)
   const [password, setPassword] = React.useState(undefined)
   const [submit, setSubmit] = React.useState(true)
+  const [cookie, setCookie] = useCookies()
 
   React.useEffect(() => {
     checkInputs()
@@ -126,6 +129,8 @@ export default function Registration() {
         },
         body: JSON.stringify(data)
       })
+      const resObj = await res.json()
+      return resObj.token
     } catch (e) {
       console.error('Error:', e)
     }
@@ -133,11 +138,13 @@ export default function Registration() {
 
   const createUser = async () => {
     const data = { userName, email, password }
-    await postUser(data)
+    const userToken = await postUser(data)
+    setCookie('token', userToken)
   }
 
   return (
     <Box className={classes.center}>
+      {cookie.token && <Redirect to={'/additempage'}></Redirect>}
       <Box bgcolor='success.main' border={1} className={classes.signUp}>
         <Typography variant="h4" component="h2" color='secondary' className={classes.signUpTitle}>
           Registration

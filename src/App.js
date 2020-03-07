@@ -1,6 +1,7 @@
 import React from "react";
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core'
+import { CookiesProvider } from 'react-cookie'
 import AppRouter from './router/AppRouter'
 import "./App.css";
 import 'normalize.css'
@@ -121,12 +122,15 @@ function App() {
   }
 
   return(
-    <ThemeProvider theme={themeType} >
-      <Box bgcolor='info.main'> 
-      {console.log(themeType)}
-        <AppRouter changeTheme={chooseTheme}/>
-      </Box>
-    </ThemeProvider>
+    <CookiesProvider>
+      <ThemeProvider theme={themeType} >
+        <Box bgcolor='info.main'> 
+        {console.log(themeType)}
+          <AppRouter changeTheme={chooseTheme}/>
+        </Box>
+      </ThemeProvider>
+    </CookiesProvider>
+   
   );
 }
 

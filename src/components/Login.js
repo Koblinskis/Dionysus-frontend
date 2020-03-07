@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
-import { Typography, Box, TextField } from '@material-ui/core';
+import { Typography, Box, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -66,6 +66,7 @@ export default function Login() {
             className={classes.inputFields}
           />
       </Box>
+      <Button variant="contained" color="primary">Login</Button>
       <Box className={classes.bottomText}>
         <Typography variant="caption" color='secondary'>Don't have an account <NavLink to="/registration" color='secondary'>Signup</NavLink></Typography>
       </Box>
