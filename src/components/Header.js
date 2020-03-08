@@ -282,7 +282,7 @@ export default function Header(props) {
             <MenuIcon /> 
           </IconButton>}
           <Typography className={classes.title} variant="h6" noWrap>
-            Home Page
+            Dionysus
           </Typography>
           <Box>
             <Button variant="contained" size='small' onClick={props.changeTheme}>
