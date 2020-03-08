@@ -1,68 +1,27 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+[Check out Dionysus here!](https://ecstatic-easley-06cd2c.netlify.com/)
 
-In the project directory, you can run:
+  
 
-### `yarn start`
+Related repos: [Client](https://github.com/Koblinskis/Dionysus-frontend), [Server](https://github.com/Koblinskis/Dionysus-backend)
+# Dionysus Client
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The Dionysus project is a web application for users to store data. The users can create an account that will be stored by an Express API backend on a MongDB Database. The application also is taking security into concern as unauthorized users cannot access the functionally of the site. Users can create a list that they can store to the database that only they can access and modify. 
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+  
 
-### `yarn test`
+![Screenshot](https://raw.githubusercontent.com/Koblinskis/Dionysus-frontend/master/screenshot.png)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The Dionysus frontend uses the React framework and React Hooks to compontize the application. This web app is styled using material-ui's styled components to make a consistent and beautiful website. Material-ui also allows the user to pick between different themes that they desire, allowing for a more user friendly and enjoyable experience. The routing in Dionysus is handled though React-router.  The router has been setup in a way that prevents non-users from accessing private routes, and for allowing public routes that anyone can access giving a more secure website for users. The private routes require a valid JWT issued by the Express API backend.
 
-### `yarn build`
+This is deployed on Netlify.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## How to run the client
+Create `.env.development` file in the root of the project. That file needs to contain a reference to a running version of the server. Find out how to run the server by clicking [here](https://github.com/Koblinskis/Dionysus-backend). 
+```
+REACT_APP_NODE_URL="http://localhost:3001/"
+```
+**Step to run:**
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+ 1. `npm install`
+ 2. `npm run start`
