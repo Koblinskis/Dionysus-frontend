@@ -155,7 +155,25 @@ export default function Header(props) {
     setState({ ...state, [side]: open });
   };
 
-  const logout = () => {
+  const postLogout = async() => {
+    try {
+      const res = await fetch(process.env.REACT_APP_NODE_URL + 'logout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + cookie.token,
+        }
+      })
+      return res
+    } catch (e) {
+      console.error('Error:', e)
+      alert(e)
+    }
+  }
+
+  const logout = async () => {
+    const res = await postLogout()
+    console.log(res)
     removeCookie('token')
     setLogin(true)
     handleMenuClose()
