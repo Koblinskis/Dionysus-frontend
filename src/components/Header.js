@@ -177,6 +177,7 @@ export default function Header(props) {
     removeCookie('token')
     setLogin(true)
     handleMenuClose()
+    window.location.reload()
   }
 
   const sideList = side => (

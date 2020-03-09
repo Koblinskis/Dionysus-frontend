@@ -4,10 +4,37 @@ import { Route, Redirect } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
 const PrivateRouter = ({component: Component, ...rest}) => {
-    const [cookie, setCookie] = useCookies()
+    const [cookie, setCookie, removeCookie] = useCookies()
+    const [authToken, setAuthToken] = React.useState(undefined)
+
+    const authUser = async () => {
+        
+    }
+
+    React.useEffect(() => {
+        async function authUser() {
+            try {
+                const res = await fetch(process.env.REACT_APP_NODE_URL + 'profile', {
+                    method: 'GET',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + cookie.token,
+                    }
+                })
+                return res.body.token
+            } catch (e) {
+                console.error('Error:', e)
+                return null
+            }
+        }
+        const res = authUser()
+        setAuthToken(res)
+    }, [])
+
+
     return (
         <Route {...rest} render={props => (
-            cookie.token ? 
+            cookie.token !== authToken ? 
                 <Component {...props} /> 
                 : <Redirect to={'/login'} />
         )} />
