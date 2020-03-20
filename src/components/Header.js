@@ -22,6 +22,7 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     display: 'none',
+    marginRight: '20px',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
@@ -304,7 +305,7 @@ export default function Header(props) {
             Dionysus
           </Typography>
           <Box>
-            <Button variant="contained" size='small' onClick={props.changeTheme}>
+            <Button variant="contained" size='small' onClick={props.changeTheme} style={{marginRight: "10px"}}>
               dark
             </Button>
             <Button variant="contained" size='small' onClick={props.changeTheme}>
