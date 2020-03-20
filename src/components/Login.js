@@ -141,7 +141,8 @@ export default function Login() {
             onChange={handlePasswordChange}
             className={classes.inputFields}
           />
-      </Box><br/>
+      </Box>
+      <div style={{height: '20px'}}></div>
       <Button variant="contained" color="primary" disabled={submit} onClick={checkLogin}>Login</Button>
       <Box className={classes.bottomText}>
         <Typography variant="caption" color='secondary'>Don't have an account? <NavLink to="/registration" color='secondary'>Signup</NavLink></Typography>
