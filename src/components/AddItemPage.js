@@ -60,8 +60,11 @@ export default function AddItemPage() {
       <Box className={classes.listItems}>
           {<ListItem number={number}/>}
         <br/>
-        <Button color="secondary" onClick={addItem}>
+        <Button color="secondary" onClick={addItem} style={{marginTop: "20px"}}>
             <AddCircleIcon />Add Item
+        </Button>
+        <Button color="secondary" onClick={removeItem} style={{marginTop: "5px"}}>
+            <AddCircleIcon />Remove Item
         </Button>
       </Box>
     )
@@ -69,6 +72,10 @@ export default function AddItemPage() {
 
   const addItem = () => {
     setNumber(number => number + 1)
+  }
+
+  const removeItem = () => {
+    setNumber(number => number - 1)
   }
 
   return (
