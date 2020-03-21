@@ -1,9 +1,11 @@
 import React from "react";
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core'
 import { CookiesProvider } from 'react-cookie'
+
 import AppRouter from './router/AppRouter'
 import { defTheme, darkTheme } from './theme'
+
 import "./App.css";
 import 'normalize.css'
 

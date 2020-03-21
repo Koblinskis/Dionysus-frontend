@@ -24,11 +24,11 @@ const useStyles = makeStyles(theme => ({
 
 export default function Profile() {
   const classes = useStyles()
+
   return (
     <Box className={classes.center}>
       <Box bgcolor='success.main' border={1} className={classes.signUp}>
         <Typography variant='h2' color='secondary'>Profile</Typography>
-
       </Box>
     </Box>
   )

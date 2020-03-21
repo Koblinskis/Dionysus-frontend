@@ -28,7 +28,6 @@ export default function About() {
     <Box className={classes.center}>
       <Box bgcolor='success.main' border={1} className={classes.signUp}>
         <Typography variant='h2' color='secondary'>About</Typography>
-
       </Box>
     </Box>
   )

@@ -2,7 +2,6 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { Box, BottomNavigationAction, BottomNavigation } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import RestoreIcon from '@material-ui/icons/Restore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
@@ -24,7 +23,6 @@ export default function Footer() {
 
   return (
     <Box className={classes.center}>
-      
     <BottomNavigation
       value={value}
       onChange={(event, newValue) => {

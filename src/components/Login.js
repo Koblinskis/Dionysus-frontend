@@ -3,7 +3,7 @@ import { NavLink, Redirect } from 'react-router-dom';
 import { Typography, Box, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import validator from 'validator'
-import { useCookie, useCookies } from 'react-cookie'
+import { useCookies } from 'react-cookie'
 
 const useStyles = makeStyles(theme => ({
   signUp: {
@@ -44,7 +44,6 @@ const useStyles = makeStyles(theme => ({
 export default function Login() {
   const classes = useStyles();
   const [cookie, setCookie] = useCookies()
-  const [userInfo, setUserInfo] = React.useState(undefined)
   const [field1, setField1] = React.useState(undefined)
   const [fieldType, setFieldType] = React.useState(undefined)
   const [password, setPassword] = React.useState(undefined)

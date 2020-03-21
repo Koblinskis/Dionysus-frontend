@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import { Divider, Box } from '@material-ui/core';
+
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Home from '../components/Home'
@@ -22,6 +23,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function AppRouter(props) {
   const classes = useStyles()
+
   return (
     <BrowserRouter>
       <div>

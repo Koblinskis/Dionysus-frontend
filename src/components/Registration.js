@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react'
-import { NavLink, Redirect, withRouter } from 'react-router-dom';
+import React from 'react'
+import { NavLink, Redirect } from 'react-router-dom';
 import { Typography, Box, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useCookies } from 'react-cookie'
 import validator from 'validator'
-import Home from './Home'
 
 const useStyles = makeStyles(theme => ({
   signUp: {
@@ -62,7 +61,6 @@ export default function Registration() {
   const handleUserNameChange = (e) => {
     e.preventDefault()
     setFirst(1)
-    
     if (e.target.value.length > 5) {
       setUserName(e.target.value)
     } else

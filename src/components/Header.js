@@ -1,9 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom'
 import { fade, makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Box, IconButton, MenuItem, Button, Typography, InputBase, Badge, Menu, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider } from '@material-ui/core';
+import { AppBar, Toolbar, Box, IconButton, MenuItem, Button, Typography, Badge, Menu, Drawer, List, ListItem, ListItemText, Divider } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MoreIcon from '@material-ui/icons/MoreVert';
@@ -95,18 +94,6 @@ const useStyles = makeStyles(theme => ({
   },
   menuList: {
     color: '#000000'
-  },
-  menuSList: {
-    color: '#000000'
-  },
-  menuWList: {
-    color: '#000000'
-  },
-  menuEList: {
-    color: '#000000'
-  },
-  menuRList: {
-    color: '#000000'
   }
 }));
 
@@ -152,7 +139,6 @@ export default function Header(props) {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-
     setState({ ...state, [side]: open });
   };
 
@@ -190,28 +176,28 @@ export default function Header(props) {
       bgcolor='success.main'
     >
       <Typography variant='h4' className={classes.menuTitle}>Menu</Typography>
-            <Divider color='primary' />
+        <Divider color='primary' />
       <List>
-          <ListItem button component={NavLink} to={'/'}>
-            <ListItemText primary={'Home'} />
-            <HomeIcon />
-          </ListItem>
-          <ListItem button component={NavLink} to={'/profile'}>
-            <ListItemText primary={'Profile'} />
-            <AccountCircle />
-          </ListItem>
-          <ListItem button component={NavLink} to={'/settings'}>
-            <ListItemText primary={'Settings'} />
-            <SettingsIcon />
-          </ListItem>
-          <ListItem button component={NavLink} to={'/about'}>
-            <ListItemText primary={'About'} />
-            <InfoIcon />
-          </ListItem>
-          <ListItem button onClick={logout} className={classes.logOut}>
-            <ListItemText primary={'Logout'} />
-            <ExitToAppIcon />
-          </ListItem>
+        <ListItem button component={NavLink} to={'/'}>
+          <ListItemText primary={'Home'} />
+          <HomeIcon />
+        </ListItem>
+        <ListItem button component={NavLink} to={'/profile'}>
+          <ListItemText primary={'Profile'} />
+          <AccountCircle />
+        </ListItem>
+        <ListItem button component={NavLink} to={'/settings'}>
+          <ListItemText primary={'Settings'} />
+          <SettingsIcon />
+        </ListItem>
+        <ListItem button component={NavLink} to={'/about'}>
+          <ListItemText primary={'About'} />
+          <InfoIcon />
+        </ListItem>
+        <ListItem button onClick={logout} className={classes.logOut}>
+          <ListItemText primary={'Logout'} />
+          <ExitToAppIcon />
+        </ListItem>
       </List>
     </Box>
   );
@@ -315,8 +301,7 @@ export default function Header(props) {
           </Box>
           <Box className={classes.grow} />
           <Box className={classes.sectionDesktop}>
-            { login
-              ? 
+            { login ? 
               <Box>
                 <Button>
                   <NavLink to="/login" className={classes.whiteColor}>Login</NavLink>
@@ -324,8 +309,7 @@ export default function Header(props) {
                 <Button>
                   <NavLink to="/registration" className={classes.whiteColor}>Signup</NavLink>
                 </Button>
-              </Box>
-              :
+              </Box> :
               <Box>
                 <IconButton aria-label="show 4 new mails" className={classes.whiteColor} component={NavLink} to={'/additempage'}>
                   <Badge badgeContent={0} color="error">

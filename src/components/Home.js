@@ -25,6 +25,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Home(props) {
   const classes = useStyles()
+
   return (
     <Box className={classes.center}>
       <Box bgcolor='success.main' border={1} className={classes.signUp}>
@@ -33,7 +34,6 @@ export default function Home(props) {
           <p>Want to jump right in?</p>
           <Button variant='contained' color='primary' style={{margin: '0 10px'}} component={NavLink} to={'/login'}>Login</Button>
           <Button variant='contained' color='primary' style={{margin: '0 10px'}} component={NavLink} to={'/registration'}>Register</Button>
-
           <h3>About Dionysus</h3>
           <p>Dionysus allows you to:</p>
           <ul style={{'font-size': '14px'}}>
@@ -46,10 +46,8 @@ export default function Home(props) {
             <li>Create list items that are stored and visible only to YOU!</li>
             <li>Your passwords are encryped before they are stored to maximize security</li>
           </ul>
-
           <h3>Theming</h3>
           <p>Check out the themes:</p>
-          
           <Button variant='contained' color='primary' style={{margin: '0 10px'}} onClick={props.changeTheme}>default</Button>
           <Button variant='contained' color='primary' style={{margin: '0 10px'}} onClick={props.changeTheme}>dark</Button>
         </Typography>
