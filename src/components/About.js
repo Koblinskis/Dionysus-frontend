@@ -24,6 +24,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function About() {
   const classes = useStyles()
+  
   return (
     <Box className={classes.center}>
       <Box bgcolor='success.main' border={1} className={classes.signUp}>
