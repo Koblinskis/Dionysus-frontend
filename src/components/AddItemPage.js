@@ -63,9 +63,9 @@ export default function AddItemPage() {
         <Button color="secondary" onClick={addItem} style={{marginTop: "20px"}}>
             <AddCircleIcon />Add Item
         </Button>
-        <Button color="secondary" onClick={removeItem} style={{marginTop: "5px"}}>
+        {/* <Button color="secondary" onClick={removeItem} style={{marginTop: "5px"}}>
             <AddCircleIcon />Remove Item
-        </Button>
+        </Button> */}
       </Box>
     )
   }
