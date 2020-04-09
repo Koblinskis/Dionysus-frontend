@@ -29,7 +29,6 @@ function App() {
     <CookiesProvider>
       <ThemeProvider theme={themeType} >
         <Box bgcolor='info.main'> 
-        {console.log(themeType)}
           <AppRouter changeTheme={chooseTheme}/>
         </Box>
       </ThemeProvider>

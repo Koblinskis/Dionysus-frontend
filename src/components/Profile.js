@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Typography, TextField } from '@material-ui/core';
+import { Box, Typography, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useCookies } from 'react-cookie'
 
@@ -22,39 +22,53 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center'
   },
+  info: {
+    textAlign: 'left'
+  },
+  edit: {
+    display: 'flex',
+    flexDirection: 'row',
+  }
 }))
 
 export default function Profile() {
   const classes = useStyles()
   const [cookie, setCookie] = useCookies()
   const [edit, setEdit] = React.useState(false)
+  const [user, setUser] = React.useState({})
+  const [loading, setLoading] = React.useState(false)
 
-  const getUser = async (res, req) => {
-    try {
-      const res = await fetch(process.env.REACT_APP_NODE_URL + 'profile', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + cookie.token,
-        }
-      })
-      const resObj = await res.json()
-      return resObj
-    } catch (e) {
-      console.error('Error:', e)
-      return null
+  React.useEffect(() => {
+    async function getUser() {
+      setLoading(true)
+      try {
+        const res = await fetch(process.env.REACT_APP_NODE_URL + 'profile', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + cookie.token
+          }
+        })
+        const resObj = await res.json()
+        setUser(resObj)
+        setLoading(false)
+      } catch (e) {
+        return null
+      }
     }
-  }
+    getUser()
+  }, [])
 
-  const check = async () => {
-    const user = await getUser()
-    console.log(user)
+  const editStatus = () => {
+    console.log('1')
+    setEdit(true)
   }
 
   return (
     <Box className={classes.center}>
       <Box bgcolor='success.main' border={1} className={classes.signUp}>
         <Typography variant='h2' color='secondary'>Profile</Typography>
+        {loading ? console.log('hi'): console.log(user)}
         {edit ? <div>
           <TextField
             required
@@ -64,6 +78,7 @@ export default function Profile() {
             helperText='Must be 6 characters long'
             color='secondary'
           />
+          <br/>
           <TextField
             required
             id="standard-basic"
@@ -71,19 +86,31 @@ export default function Profile() {
             color='secondary'
             helperText='Enter a vaild Email'
           />
+          <br/>
           <TextField
             required
-            id="standard-password-input"
-            label="Password"
-            type="password"
-            helperText='Must be 6 characters long'
-            autoComplete="current-password"
+            id="standard-basic"
+            label="Name"
+            color='secondary'
+          />
+          <br/>
+          <div style={{paddingTop: '10px'}}></div>
+          <TextField
+            required
+            id="standard-basic"
+            label="Age"
             color='secondary'
           />
           </div>
            : 
-          <div>hi <button onClick={check}>check</button></div>
-        }  
+          <div className={classes.info}>
+            <Typography variant='subtitle1' color='secondary'>User Name: {user.userName}</Typography>
+            <Typography variant='subtitle1' color='secondary'>Email: {user.email}</Typography>
+            <Typography variant='subtitle1' color='secondary'>Name: {user.name}</Typography>
+            <Typography variant='subtitle1' color='secondary'>Age: {user.age === 0 ? 'Unknown' : user.age}</Typography>
+            <Button onClick={editStatus}>edit</Button> <Button>change password</Button>
+          </div>
+        }
       </Box>
     </Box>
   )

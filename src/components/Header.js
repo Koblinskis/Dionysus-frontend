@@ -109,7 +109,6 @@ export default function Header(props) {
   const mobileMenuId = 'primary-search-account-menu-mobile';
 
   React.useEffect(() => {
-    console.log(cookie.token)
     if(cookie.token !== undefined){
       setLogin(false)
     }
@@ -161,7 +160,6 @@ export default function Header(props) {
 
   const logout = async () => {
     const res = await postLogout()
-    console.log(res)
     removeCookie('token')
     setLogin(true)
     handleMenuClose()
