@@ -10,7 +10,8 @@ import AddIcon from '@material-ui/icons/Add';
 import SettingsIcon from '@material-ui/icons/Settings';
 import InfoIcon from '@material-ui/icons/Info';
 import HomeIcon from '@material-ui/icons/Home';
-import { useCookies } from 'react-cookie'
+import { useCookies } from 'react-cookie';
+import postLogout from '../fetchcalls/postLogout'
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -142,22 +143,6 @@ export default function Header(props) {
     setState({ ...state, [side]: open });
   };
 
-  const postLogout = async() => {
-    try {
-      const res = await fetch(process.env.REACT_APP_NODE_URL + 'logout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + cookie.token,
-        }
-      })
-      return res
-    } catch (e) {
-      console.error('Error:', e)
-      alert(e)
-    }
-  }
-
   const logout = async () => {
     const res = await postLogout()
     removeCookie('token')
@@ -272,6 +257,7 @@ export default function Header(props) {
 
   return (
     <Box className={classes.grow}>
+      {console.log(cookie)}
       <AppBar position="static" color='primary'>
         <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
           {sideList('left')}
