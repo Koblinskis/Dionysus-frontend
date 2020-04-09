@@ -4,7 +4,7 @@ import { Box } from '@material-ui/core'
 import { CookiesProvider } from 'react-cookie'
 
 import AppRouter from './router/AppRouter'
-import { defTheme, darkTheme } from './theme'
+import { defTheme, darkTheme } from './utils/theme'
 
 import "./App.css";
 import 'normalize.css'
