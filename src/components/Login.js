@@ -4,6 +4,7 @@ import { Typography, Box, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import validator from 'validator'
 import { useCookies } from 'react-cookie'
+import postLogin from '../fetchcalls/postLogin'
 
 const useStyles = makeStyles(theme => ({
   signUp: {
@@ -75,23 +76,6 @@ export default function Login() {
       setPassword(e.target.value)
     } else {
       setPassword(undefined)
-    }
-  }
-
-  const postLogin = async (data) => {
-    try {
-      const res = await fetch(process.env.REACT_APP_NODE_URL + 'login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-      })
-      const resObj = await res.json()
-      return resObj.token
-    } catch (e) {
-      console.error('Error:', e)
-      alert('Invaild User')
     }
   }
 
