@@ -4,7 +4,6 @@ import { Box, BottomNavigationAction, BottomNavigation } from '@material-ui/core
 import { makeStyles } from '@material-ui/core/styles';
 import HomeIcon from '@material-ui/icons/Home';
 import { useCookies } from 'react-cookie'
-import LocationOnIcon from '@material-ui/icons/LocationOn';
 import SettingsIcon from '@material-ui/icons/Settings';
 import InfoIcon from '@material-ui/icons/Info';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -21,6 +20,17 @@ const useStyles = makeStyles(theme => ({
     maxWidth: 900,
     minWidth: 500,
     backgroundColor: theme.palette.background.default,
+    [theme.breakpoints.down('xs')]: {
+      minWidth: 200,
+      maxWidth: 400,
+      padding: 0
+    },
+  },
+  button: {
+    [theme.breakpoints.down('xs')]: {
+      padding: 0,
+      minWidth: '60px'
+    },
   },
 }));
 
@@ -28,7 +38,7 @@ export default function Footer() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [login, setLogin] = React.useState(true)
-  const [cookie, setCookie, removeCookie] = useCookies(['token'])
+  const [cookie, setCookie] = useCookies(['token'])
 
   React.useEffect(() => {
     if(cookie.token !== undefined){
@@ -63,11 +73,11 @@ export default function Footer() {
         className={classes.root}
         color='secondary'
       > 
-      <BottomNavigationAction component={NavLink} to={`/`} label="Home" icon={<HomeIcon />} />
-      <BottomNavigationAction component={NavLink} to={`/profile`} label="Profile" icon={<AccountCircleIcon />} />
-      <BottomNavigationAction component={NavLink} to={`/addItemPage`} label="List" icon={<PlaylistAddIcon />} />
-      <BottomNavigationAction component={NavLink} to={`/about`} label="About" icon={<InfoIcon />} />
-      <BottomNavigationAction component={NavLink} to={`/settings`} label="Settings" icon={<SettingsIcon />} />
+      <BottomNavigationAction className={classes.button} component={NavLink} to={`/`} label="Home" icon={<HomeIcon />} />
+      <BottomNavigationAction className={classes.button} component={NavLink} to={`/profile`} label="Profile" icon={<AccountCircleIcon />} />
+      <BottomNavigationAction className={classes.button} component={NavLink} to={`/addItemPage`} label="List" icon={<PlaylistAddIcon />} />
+      <BottomNavigationAction className={classes.button} component={NavLink} to={`/about`} label="About" icon={<InfoIcon />} />
+      <BottomNavigationAction className={classes.button} component={NavLink} to={`/settings`} label="Settings" icon={<SettingsIcon />} />
     </BottomNavigation>
     }
     
