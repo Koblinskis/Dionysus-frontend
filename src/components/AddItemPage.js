@@ -2,6 +2,7 @@ import React from 'react'
 import { Box, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 
 import ListItem from './listItem'
 
@@ -64,9 +65,9 @@ export default function AddItemPage() {
         <Button color="secondary" onClick={addItem} style={{marginTop: "20px"}}>
             <AddCircleIcon />Add Item
         </Button>
-        {/* <Button color="secondary" onClick={removeItem} style={{marginTop: "5px"}}>
-            <AddCircleIcon />Remove Item
-        </Button> */}
+        <Button color="secondary" onClick={removeItem} style={{marginTop: "5px"}}>
+            <RemoveCircleIcon />Remove Item
+        </Button>
       </Box>
     )
   }
@@ -76,17 +77,22 @@ export default function AddItemPage() {
   }
 
   const removeItem = () => {
-    setNumber(number => number - 1)
+    if(number > 0) {
+      setNumber(number => number - 1)
+    } else {
+      setNumber(0)
+    }
   }
 
   return (
     <Box className={classes.center}>
       <Box bgcolor='success.main' border={1} className={classes.formControl}>
         <Typography variant='h3' color='secondary'>List</Typography>
+        {console.log(number)}
       {/* <FormControl>
         <InputLabel id="demo-simple-select-label" color="secondary">Type of field</InputLabel>
         
-        {/* <Select
+        <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={dataStructure}
@@ -96,8 +102,8 @@ export default function AddItemPage() {
           <MenuItem value={20}>Chart</MenuItem>
           <MenuItem value={30}>Graph</MenuItem>
         </Select> 
-      </FormControl> */}
-      {/* {dataStructure ? form : undefined} */}
+      </FormControl>
+        {dataStructure ? form : undefined} */}
         {list()}
       </Box>
     </Box>
