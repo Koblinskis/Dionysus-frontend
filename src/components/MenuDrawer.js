@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import { Box, Typography, Divider, List, ListItem, ListItemText, } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -6,6 +7,8 @@ import InfoIcon from '@material-ui/icons/Info';
 import HomeIcon from '@material-ui/icons/Home';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { useCookies } from 'react-cookie'
+import postLogout from '../fetchcalls/postLogout'
 
 const useStyles = makeStyles({
   list: {
@@ -21,17 +24,25 @@ const useStyles = makeStyles({
   },
 })
 
-export default function Drawer(props) {
+export default function MenuDrawer(props) {
   const classes = useStyles()
+  const [open, setOpen] = React.useState(props.open)
+  const [cookie, setCookie, removeCookie] = useCookies(['token'])
+
+  const logout = async () => {
+    const res = await postLogout()
+    removeCookie('token')
+    window.location.reload()
+  }
 
   return ( 
     <div>
-      { props.open && 
+      { open && 
       <Box
         className={classes.list}
         role="presentation"
-        onClick={toggleDrawer(side, false)}
-        onKeyDown={toggleDrawer(side, false)}
+        onClick={setOpen(false)}
+        onKeyDown={setOpen(false)}
         bgcolor='success.main'
       >
         <Typography variant='h4' className={classes.menuTitle}>Menu</Typography>

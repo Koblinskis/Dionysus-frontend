@@ -14,7 +14,6 @@ export default function ListItem(props) {
   const old = oldNumber.current
 
   React.useEffect(() => {
-    console.log(old, props.number)
     if(old < props.number) {
       setItems(item.concat(<Grid item md={4} sm={12} xs={12} key={uuidv4()}>
         <TextField color="secondary" id="standard-basic" label={`Item`}/>
@@ -30,9 +29,6 @@ export default function ListItem(props) {
 
   return (
     <Grid container spacing={6} >
-      {console.log(props.number)}
-      {console.log(oldNumber.current)}
-      {console.log(item)}
       {item}
     </Grid>
   )

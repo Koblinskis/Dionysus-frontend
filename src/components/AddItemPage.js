@@ -88,7 +88,6 @@ export default function AddItemPage() {
     <Box className={classes.center}>
       <Box bgcolor='success.main' border={1} className={classes.formControl}>
         <Typography variant='h3' color='secondary'>List</Typography>
-        {console.log(number)}
       {/* <FormControl>
         <InputLabel id="demo-simple-select-label" color="secondary">Type of field</InputLabel>
         
