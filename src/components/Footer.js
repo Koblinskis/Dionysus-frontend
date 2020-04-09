@@ -32,6 +32,11 @@ const useStyles = makeStyles(theme => ({
       minWidth: '60px'
     },
   },
+  button2: {
+    [theme.breakpoints.down('xs')]: {
+      padding: 0,
+    },
+  },
 }));
 
 export default function Footer() {
@@ -58,10 +63,10 @@ export default function Footer() {
         className={classes.root}
         color='secondary'
       > 
-      <BottomNavigationAction component={NavLink} to={`/`} label="Home" icon={<HomeIcon />} />
-      <BottomNavigationAction component={NavLink} to={`/registration`} label="Sign-Up" icon={<GroupAddIcon />} />
-      <BottomNavigationAction component={NavLink} to={`/login`} label="Login" icon={<ExitToAppIcon />} />
-      <BottomNavigationAction component={NavLink} to={`/about`} label="About" icon={<InfoIcon />} />
+      <BottomNavigationAction className={classes.button2} component={NavLink} to={`/`} label="Home" icon={<HomeIcon />} />
+      <BottomNavigationAction className={classes.button2} component={NavLink} to={`/registration`} label="Sign-Up" icon={<GroupAddIcon />} />
+      <BottomNavigationAction className={classes.button2} component={NavLink} to={`/login`} label="Login" icon={<ExitToAppIcon />} />
+      <BottomNavigationAction className={classes.button2} component={NavLink} to={`/about`} label="About" icon={<InfoIcon />} />
     </BottomNavigation>
     :
     <BottomNavigation
