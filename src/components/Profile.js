@@ -72,6 +72,22 @@ export default function Profile() {
     setEdit(true)
   }
 
+  const patchUser = async (data) => {
+    try {
+      const res = await fetch(process.env.REACT_APP_NODE_URL + 'profile', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+      const resObj = await res.json()
+      return resObj
+    } catch (e) {
+      console.error('Error:', e)
+    }
+  }
+
   const handleEmailChange = (e) => {
     e.preventDefault()
     if (e.target !== '') {
