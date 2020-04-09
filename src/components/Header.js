@@ -12,6 +12,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import HomeIcon from '@material-ui/icons/Home';
 import { useCookies } from 'react-cookie';
 import postLogout from '../fetchcalls/postLogout'
+import MenuDrawer from './MenuDrawer'
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -103,6 +104,7 @@ export default function Header(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [login, setLogin] = React.useState(true)
+  const [open, setOpen] = React.useState(false)
   const [cookie, setCookie, removeCookie] = useCookies(['token'])
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -131,16 +133,9 @@ export default function Header(props) {
   const handleMobileMenuOpen = event => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-  
-  const [state, setState] = React.useState({
-    left: false,
-  });
 
-  const toggleDrawer = (side, open) => event => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }
-    setState({ ...state, [side]: open });
+  function toggleDrawer(op) {
+    setOpen(op);
   };
 
   const logout = async () => {
@@ -150,41 +145,6 @@ export default function Header(props) {
     handleMenuClose()
     window.location.reload()
   }
-
-  const sideList = side => (
-    <Box
-      className={classes.list}
-      role="presentation"
-      onClick={toggleDrawer(side, false)}
-      onKeyDown={toggleDrawer(side, false)}
-      bgcolor='success.main'
-    >
-      <Typography variant='h4' className={classes.menuTitle}>Menu</Typography>
-        <Divider color='primary' />
-      <List>
-        <ListItem button component={NavLink} to={'/'}>
-          <ListItemText primary={'Home'} />
-          <HomeIcon />
-        </ListItem>
-        <ListItem button component={NavLink} to={'/profile'}>
-          <ListItemText primary={'Profile'} />
-          <AccountCircle />
-        </ListItem>
-        <ListItem button component={NavLink} to={'/settings'}>
-          <ListItemText primary={'Settings'} />
-          <SettingsIcon />
-        </ListItem>
-        <ListItem button component={NavLink} to={'/about'}>
-          <ListItemText primary={'About'} />
-          <InfoIcon />
-        </ListItem>
-        <ListItem button onClick={logout} className={classes.logOut}>
-          <ListItemText primary={'Logout'} />
-          <ExitToAppIcon />
-        </ListItem>
-      </List>
-    </Box>
-  );
 
   const renderMenu = (
     <Menu
@@ -259,16 +219,14 @@ export default function Header(props) {
     <Box className={classes.grow}>
       {console.log(cookie)}
       <AppBar position="static" color='primary'>
-        <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
-          {sideList('left')}
-        </Drawer>
+        <MenuDrawer open={open} onChange={toggleDrawer}/>
         <Toolbar>
           {!login && <IconButton
             edge="start"
             className={classes.menuButton}
             aria-label="open drawer"
             className={classes.whiteColor}
-            onClick={toggleDrawer('left', true)}
+            onClick={() => toggleDrawer(true)}
           >
             <MenuIcon /> 
           </IconButton>}

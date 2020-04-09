@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { Box, Typography, Divider, List, ListItem, ListItemText, } from '@material-ui/core';
+import { Box, Typography, Divider, List, ListItem, ListItemText, Drawer} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import SettingsIcon from '@material-ui/icons/Settings';
 import InfoIcon from '@material-ui/icons/Info';
@@ -26,7 +26,6 @@ const useStyles = makeStyles({
 
 export default function MenuDrawer(props) {
   const classes = useStyles()
-  const [open, setOpen] = React.useState(props.open)
   const [cookie, setCookie, removeCookie] = useCookies(['token'])
 
   const logout = async () => {
@@ -35,14 +34,18 @@ export default function MenuDrawer(props) {
     window.location.reload()
   }
 
+  const toggleDrawer = (open) => event => {
+    props.onChange(open)
+  };
+
   return ( 
     <div>
-      { open && 
-      <Box
+      <Drawer open={props.open} onClose={toggleDrawer(false)}>
+          {<Box
         className={classes.list}
         role="presentation"
-        onClick={setOpen(false)}
-        onKeyDown={setOpen(false)}
+        onClick={toggleDrawer(false)}
+        onKeyDown={toggleDrawer(false)}
         bgcolor='success.main'
       >
         <Typography variant='h4' className={classes.menuTitle}>Menu</Typography>
@@ -70,6 +73,7 @@ export default function MenuDrawer(props) {
           </ListItem>
         </List>
       </Box>}
+        </Drawer>
     </div>
   )
 }
